@@ -1,231 +1,45 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>全国布局 — 来云顶班</title>
-<link rel="stylesheet" href="css/style.css">
-<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
-</head>
-<body>
+NATIONAL LAYOUT
+全国城市布局
+335 个城市 · 覆盖一线到五线 · 从样板到全国三年扩展计划
+CHINA MAP
+全国城市分布
+悬停城市查看 KPI 摘要，颜色表示发展等级。
+🗺️ 地图加载中…
+高等级
+中等级
+低等级
+EXPANSION STRATEGY
+三年扩展策略
+从 10 个样板城市到 300+ 全国覆盖，阶梯式增长。
 
-<section class="hero section--dark" style="min-height:50vh">
-  <div class="hero-content fade-in">
-    <p class="hero-eyebrow">NATIONAL LAYOUT</p>
-    <h1 class="hero-title hero-title--gradient">全国城市布局</h1>
-    <p class="hero-sub" style="margin:0 auto">335 个城市 · 覆盖一线到五线 · 从样板到全国三年扩展计划</p>
-  </div>
-</section>
 
-<!-- 中国地图 -->
-<section class="section section--darker">
-  <div class="container">
-    <p class="section-eyebrow fade-in">CHINA MAP</p>
-    <h2 class="section-title fade-in">全国城市分布</h2>
-    <p class="section-sub fade-in">点击城市查看 KPI 摘要，颜色表示发展阶段等级。</p>
-    <div class="chart-box chart-box--map fade-in" id="mapChart">
-      <div id="mapLoading" style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-m);font-size:14px">
-        <span>🗺️ 地图加载中…</span>
-      </div>
-    </div>
-  </div>
-</section>
+CITY LIST
+335 城市完整列表
+按城市等级分组，包含用户/商户/流水预测目标。
+        全部等级
+        一线
+        新一线
+        二线
+        三线
+        四线
+        五线
+       
+城市
+等级
+阶段
+用户目标
+商户目标
+地推
+流水(万)
+状态
 
-<!-- 布局策略 -->
-<section class="section section--dark">
-  <div class="container text-center">
-    <p class="section-eyebrow fade-in">EXPANSION STRATEGY</p>
-    <h2 class="section-title fade-in">三年扩展策略</h2>
-    <p class="section-sub fade-in" style="margin:0 auto 48px">从 10 个样板城市到 300+ 全国覆盖，阶梯式增长。</p>
-    <div class="card-grid card-grid--4" id="layoutGrid"></div>
-    <div class="chart-box fade-in mt-12" id="expansionChart" style="max-width:720px;margin-left:auto;margin-right:auto"></div>
-  </div>
-</section>
+BY TIER
+按城市等级分布
 
-<!-- 城市列表 -->
-<section class="section section--light">
-  <div class="container">
-    <p class="section-eyebrow fade-in">CITY LIST</p>
-    <h2 class="section-title fade-in">335 城市完整列表</h2>
-    <p class="section-sub fade-in">按城市等级分组，包含用户/商户/流水预测目标。</p>
-    <div class="search-row fade-in" style="margin-bottom:24px">
-      <input id="tableSearch" class="search-input" placeholder="搜索城市…" style="border-color:rgba(0,0,0,.12);background:var(--white);color:var(--text-d)">
-      <select id="tierFilter" style="padding:8px 16px;border-radius:980px;border:1px solid rgba(0,0,0,.12);background:var(--white);color:var(--text-d);font-size:13px;cursor:pointer">
-        <option value="all">全部等级</option>
-        <option value="一线">一线</option>
-        <option value="新一线">新一线</option>
-        <option value="二线">二线</option>
-        <option value="三线">三线</option>
-        <option value="四线">四线</option>
-        <option value="五线">五线</option>
-      </select>
-      <span id="tableCount" style="font-size:13px;color:#6e6e73;margin-left:auto"></span>
-    </div>
-    <div class="table-wrap fade-in">
-      <table id="cityTable">
-        <thead>
-          <tr><th>城市</th><th>等级</th><th>阶段</th><th>用户目标</th><th>商户目标</th><th>地推</th><th>流水(万)</th><th>状态</th></tr>
-        </thead>
-        <tbody id="cityTableBody"></tbody>
-      </table>
-    </div>
-  </div>
-</section>
+BY PHASE
+按发展阶段分布
 
-<!-- 城市分布统计 -->
-<section class="section section--dark">
-  <div class="container">
-    <div class="card-grid card-grid--2">
-      <div class="fade-in">
-        <p class="section-eyebrow">BY TIER</p>
-        <h2 class="section-title">按城市等级分布</h2>
-        <div class="chart-box" id="tierPie"></div>
-      </div>
-      <div class="fade-in">
-        <p class="section-eyebrow">BY PHASE</p>
-        <h2 class="section-title">按发展阶段分布</h2>
-        <div class="chart-box" id="phasePie"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section section--darker">
-  <div class="container">
-    <div class="cta-banner scale-in">
-      <h2>选择你的城市，开始创业</h2>
-      <p>335 个城市等你来运营，低门槛高回报。</p>
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-        <a href="model.html" class="btn btn--teal btn--arrow">申请合伙人</a>
-        <a href="kpi.html" class="btn btn--outline btn--arrow">查看 KPI 看板</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script src="js/data.js"></script>
-<script src="js/shared.js"></script>
-<script>
-onReady(() => {
-  renderNav("layout");
-  renderFooter();
-
-  // Layout cards
-  const lg = document.getElementById("layoutGrid");
-  const colors = ["red", "orange", "green", "blue"];
-  LAYOUT_PHASES.forEach((p, i) => {
-    lg.innerHTML += `<div class="card card--glass fade-in"><div class="card-icon card-icon--${colors[i]}" style="font-size:28px;font-weight:700">${p.count}</div><h3>${p.label}</h3><p style="font-size:12px;color:var(--text-m);margin-bottom:8px">${p.phase}</p><p>${p.desc}</p></div>`;
-  });
-
-  // Expansion chart
-  createChart(document.getElementById("expansionChart"), {
-    tooltip: { trigger: "axis" },
-    xAxis: { type: "category", data: LAYOUT_PHASES.map(p => p.phase) },
-    yAxis: { type: "value", name: "城市数" },
-    series: [{
-      type: "bar", data: [10, 50, 120, 300],
-      itemStyle: { borderRadius: [8, 8, 0, 0], color: { type: "linear", x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: "#2dd4bf" }, { offset: 1, color: "#2997ff" }] } },
-      barWidth: "40%", label: { show: true, position: "top", color: "#a1a1a6", fontSize: 13, fontWeight: 600 }
-    }]
-  });
-
-  // City table
-  function renderTable(data) {
-    const tb = document.getElementById("cityTableBody");
-    tb.innerHTML = "";
-    data.forEach(d => {
-      const lc = d.level === "高" ? "#2dd4bf" : d.level === "中" ? "#2997ff" : "#ff9f0a";
-      tb.innerHTML += `<tr><td style="font-weight:600">${d.city}</td><td>${d.tier}</td><td>${d.phase}</td><td>${d.user}</td><td>${d.merchant}</td><td>${d.activity}</td><td style="font-weight:600">${d.revenue}</td><td><span style="display:inline-block;padding:2px 10px;border-radius:999px;font-size:11px;font-weight:600;background:${lc}22;color:${lc}">${d.level}</span></td></tr>`;
-    });
-    document.getElementById("tableCount").textContent = data.length + " 个城市";
-  }
-  renderTable(CITY_DATA);
-
-  function filterTable() {
-    const keyword = document.getElementById("tableSearch").value.trim();
-    const tier = document.getElementById("tierFilter").value;
-    let filtered = CITY_DATA;
-    if (tier !== "all") filtered = filtered.filter(d => d.tier === tier);
-    if (keyword) filtered = filtered.filter(d => d.city.includes(keyword));
-    renderTable(filtered);
-  }
-  document.getElementById("tableSearch").addEventListener("input", filterTable);
-  document.getElementById("tierFilter").addEventListener("change", filterTable);
-
-  // Tier pie
-  const tierCount = {};
-  CITY_DATA.forEach(d => { tierCount[d.tier] = (tierCount[d.tier] || 0) + 1; });
-  const tierColors = {"一线":"#ff453a","新一线":"#ff9f0a","二线":"#30d158","三线":"#2997ff","四线":"#bf5af2","五线":"#a1a1a6"};
-  createChart(document.getElementById("tierPie"), {
-    tooltip: { trigger: "item", formatter: "{b}: {c} 个 ({d}%)" },
-    series: [{ type: "pie", radius: ["42%", "68%"], center: ["50%", "50%"],
-      data: Object.entries(tierCount).map(([name, value]) => ({ name, value, itemStyle: { color: tierColors[name] } })),
-      label: { color: "#a1a1a6", fontSize: 13 }, emphasis: { itemStyle: { shadowBlur: 20, shadowColor: "rgba(0,0,0,.3)" } }
-    }]
-  });
-
-  // Phase pie
-  const phaseCount = {};
-  CITY_DATA.forEach(d => { phaseCount[d.phase] = (phaseCount[d.phase] || 0) + 1; });
-  const phaseColors = {"成熟":"#2dd4bf","成长":"#2997ff","启动":"#ff9f0a","规划":"#bf5af2"};
-  createChart(document.getElementById("phasePie"), {
-    tooltip: { trigger: "item", formatter: "{b}: {c} 个 ({d}%)" },
-    series: [{ type: "pie", radius: ["42%", "68%"], center: ["50%", "50%"],
-      data: Object.entries(phaseCount).map(([name, value]) => ({ name: name + "阶段", value, itemStyle: { color: phaseColors[name] || "#a1a1a6" } })),
-      label: { color: "#a1a1a6", fontSize: 13 }, emphasis: { itemStyle: { shadowBlur: 20, shadowColor: "rgba(0,0,0,.3)" } }
-    }]
-  });
-
-  // Load China map
-  fetch("https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json")
-    .then(r => r.json())
-    .then(geoJson => {
-      echarts.registerMap("china", geoJson);
-      document.getElementById("mapLoading").style.display = "none";
-      createChart(document.getElementById("mapChart"), {
-        tooltip: {
-          trigger: "item",
-          formatter: p => {
-            const d = CITY_DATA.find(x => x.city === p.name);
-            if (d) return `<b>${d.city}</b> (${d.tier})<br>阶段: ${d.phase} · 等级: ${d.level}<br>用户: ${d.user} · 商户: ${d.merchant}<br>地推: ${d.activity} · 流水: ${d.revenue}万`;
-            return p.name;
-          }
-        },
-        geo: {
-          map: "china", roam: true,
-          itemStyle: { areaColor: "#1d1d1f", borderColor: "rgba(255,255,255,.08)" },
-          emphasis: { itemStyle: { areaColor: "#2a2a2e" } }, label: { show: false }
-        },
-        series: [{
-          type: "scatter", coordinateSystem: "geo",
-          data: CITY_DATA.map(d => {
-            const coords = getCityCoords(d.city);
-            return coords[0] !== 0 ? { name: d.city, value: [...coords, d.revenue] } : null;
-          }).filter(Boolean),
-          symbolSize: d => Math.max(6, Math.min(20, d[2] / 16)),
-          itemStyle: {
-            color: d => {
-              const city = CITY_DATA.find(c => c.city === d.name);
-              return city ? (city.level === "高" ? "#2dd4bf" : city.level === "中" ? "#2997ff" : "#ff9f0a") : "#a1a1a6";
-            },
-            shadowBlur: 8, shadowColor: "rgba(45,212,191,.3)"
-          },
-          label: { show: false }
-        }],
-        visualMap: {
-          show: true, type: "piecewise", left: 10, bottom: 10,
-          pieces: [{ value: 2, label: "高", color: "#2dd4bf" }, { value: 1, label: "中", color: "#2997ff" }, { value: 0, label: "低", color: "#ff9f0a" }],
-          textStyle: { color: "#a1a1a6" }
-        }
-      });
-    })
-    .catch(() => {
-      document.getElementById("mapLoading").innerHTML = "<span style='color:#ff453a'>地图加载失败，请检查网络连接</span>";
-    });
-
-  initScrollAnimations();
-});
-</script>
-</body>
-</html>
+选择你的城市，开始创业
+335 个城市等你来运营，低门槛高回报。
+申请合伙人
+查看 KPI 看板
