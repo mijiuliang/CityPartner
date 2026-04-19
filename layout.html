@@ -1,45 +1,335 @@
-NATIONAL LAYOUT
-全国城市布局
-335 个城市 · 覆盖一线到五线 · 从样板到全国三年扩展计划
-CHINA MAP
-全国城市分布
-悬停城市查看 KPI 摘要，颜色表示发展等级。
-🗺️ 地图加载中…
-高等级
-中等级
-低等级
-EXPANSION STRATEGY
-三年扩展策略
-从 10 个样板城市到 300+ 全国覆盖，阶梯式增长。
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>全国布局 — 来云顶班</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+<body>
 
+<section class="hero section--dark" style="min-height:50vh">
+  <div class="hero-content fade-in">
+    <p class="hero-eyebrow">NATIONAL LAYOUT</p>
+    <h1 class="hero-title hero-title--gradient">全国城市布局</h1>
+    <p class="hero-sub" style="margin:0 auto">335 个城市 · 覆盖一线到五线 · 从样板到全国三年扩展计划</p>
+  </div>
+</section>
 
-CITY LIST
-335 城市完整列表
-按城市等级分组，包含用户/商户/流水预测目标。
-        全部等级
-        一线
-        新一线
-        二线
-        三线
-        四线
-        五线
-       
-城市
-等级
-阶段
-用户目标
-商户目标
-地推
-流水(万)
-状态
+<!-- 中国地图 -->
+<section class="section section--darker">
+  <div class="container">
+    <p class="section-eyebrow fade-in">CHINA MAP</p>
+    <h2 class="section-title fade-in">全国城市分布</h2>
+    <p class="section-sub fade-in">悬停城市查看 KPI 摘要，颜色表示发展等级。</p>
+    <div class="chart-box chart-box--map fade-in" id="mapChart" style="height:520px">
+      <div id="mapLoading" style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-m,#86868b);font-size:14px">
+        <span>🗺️ 地图加载中…</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:24px" class="fade-in">
+      <span style="font-size:13px;color:var(--text-secondary,#86868b)"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#2dd4bf;margin-right:6px"></span>高等级</span>
+      <span style="font-size:13px;color:var(--text-secondary,#86868b)"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#2997ff;margin-right:6px"></span>中等级</span>
+      <span style="font-size:13px;color:var(--text-secondary,#86868b)"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff9f0a;margin-right:6px"></span>低等级</span>
+    </div>
+  </div>
+</section>
 
-BY TIER
-按城市等级分布
+<!-- 布局策略 -->
+<section class="section section--dark">
+  <div class="container text-center">
+    <p class="section-eyebrow fade-in">EXPANSION STRATEGY</p>
+    <h2 class="section-title fade-in">三年扩展策略</h2>
+    <p class="section-sub fade-in" style="margin:0 auto 48px">从 10 个样板城市到 300+ 全国覆盖，阶梯式增长。</p>
+    <div class="card-grid card-grid--4" id="layoutGrid"></div>
+    <div class="chart-box fade-in mt-12" id="expansionChart" style="max-width:720px;margin-left:auto;margin-right:auto"></div>
+  </div>
+</section>
 
-BY PHASE
-按发展阶段分布
+<!-- 城市列表 -->
+<section class="section section--light">
+  <div class="container">
+    <p class="section-eyebrow fade-in">CITY LIST</p>
+    <h2 class="section-title fade-in">335 城市完整列表</h2>
+    <p class="section-sub fade-in">按城市等级分组，包含用户/商户/流水预测目标。</p>
+    <div class="search-row fade-in" style="margin-bottom:24px">
+      <input id="tableSearch" class="search-input" placeholder="搜索城市…" style="border-color:rgba(0,0,0,.12);background:var(--white,#fff);color:var(--text-d,#1d1d1f)">
+      <select id="tierFilter" style="padding:8px 16px;border-radius:980px;border:1px solid rgba(0,0,0,.12);background:var(--white,#fff);color:var(--text-d,#1d1d1f);font-size:13px;cursor:pointer">
+        <option value="all">全部等级</option>
+        <option value="一线">一线</option>
+        <option value="新一线">新一线</option>
+        <option value="二线">二线</option>
+        <option value="三线">三线</option>
+        <option value="四线">四线</option>
+        <option value="五线">五线</option>
+      </select>
+      <span id="tableCount" style="font-size:13px;color:#6e6e73;margin-left:auto"></span>
+    </div>
+    <div class="table-wrap fade-in">
+      <table id="cityTable">
+        <thead>
+          <tr><th>城市</th><th>等级</th><th>阶段</th><th>用户目标</th><th>商户目标</th><th>地推</th><th>流水(万)</th><th>状态</th></tr>
+        </thead>
+        <tbody id="cityTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
-选择你的城市，开始创业
-335 个城市等你来运营，低门槛高回报。
-申请合伙人
-查看 KPI 看板
+<!-- 城市分布统计 -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="card-grid card-grid--2">
+      <div class="fade-in">
+        <p class="section-eyebrow">BY TIER</p>
+        <h2 class="section-title">按城市等级分布</h2>
+        <div class="chart-box" id="tierPie"></div>
+      </div>
+      <div class="fade-in">
+        <p class="section-eyebrow">BY PHASE</p>
+        <h2 class="section-title">按发展阶段分布</h2>
+        <div class="chart-box" id="phasePie"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section section--darker">
+  <div class="container">
+    <div class="cta-banner scale-in">
+      <h2>选择你的城市，开始创业</h2>
+      <p>335 个城市等你来运营，低门槛高回报。</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <a href="model.html" class="btn btn--teal btn--arrow">申请合伙人</a>
+        <a href="kpi.html" class="btn btn--outline btn--arrow">查看 KPI 看板</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="js/data.js"></script>
+<script src="js/shared.js"></script>
+<script>
+onReady(() => {
+  renderNav("layout");
+  renderFooter();
+
+  // Layout cards
+  const lg = document.getElementById("layoutGrid");
+  const colors = ["red", "orange", "green", "blue"];
+  LAYOUT_PHASES.forEach((p, i) => {
+    lg.innerHTML += '<div class="card card--glass fade-in"><div class="card-icon card-icon--' + colors[i] + '" style="font-size:28px;font-weight:700">' + p.count + '</div><h3>' + p.label + '</h3><p style="font-size:12px;color:var(--text-m,#86868b);margin-bottom:8px">' + p.phase + '</p><p>' + p.desc + '</p></div>';
+  });
+
+  // Expansion chart
+  createChart(document.getElementById("expansionChart"), {
+    tooltip: { trigger: "axis" },
+    xAxis: { type: "category", data: LAYOUT_PHASES.map(function(p) { return p.phase; }) },
+    yAxis: { type: "value", name: "城市数" },
+    series: [{
+      type: "bar", data: [10, 50, 120, 300],
+      itemStyle: { borderRadius: [8, 8, 0, 0], color: { type: "linear", x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: "#2dd4bf" }, { offset: 1, color: "#2997ff" }] } },
+      barWidth: "40%", label: { show: true, position: "top", color: "#a1a1a6", fontSize: 13, fontWeight: 600 }
+    }]
+  });
+
+  // City table
+  function renderTable(data) {
+    var tb = document.getElementById("cityTableBody");
+    tb.innerHTML = "";
+    data.forEach(function(d) {
+      var lc = d.level === "高" ? "#2dd4bf" : d.level === "中" ? "#2997ff" : "#ff9f0a";
+      tb.innerHTML += '<tr><td style="font-weight:600">' + d.city + '</td><td>' + d.tier + '</td><td>' + d.phase + '</td><td>' + d.user + '</td><td>' + d.merchant + '</td><td>' + d.activity + '</td><td style="font-weight:600">' + d.revenue + '</td><td><span style="display:inline-block;padding:2px 10px;border-radius:999px;font-size:11px;font-weight:600;background:' + lc + '22;color:' + lc + '">' + d.level + '</span></td></tr>';
+    });
+    document.getElementById("tableCount").textContent = data.length + " 个城市";
+  }
+  renderTable(CITY_DATA);
+
+  function filterTable() {
+    var keyword = document.getElementById("tableSearch").value.trim();
+    var tier = document.getElementById("tierFilter").value;
+    var filtered = CITY_DATA;
+    if (tier !== "all") filtered = filtered.filter(function(d) { return d.tier === tier; });
+    if (keyword) filtered = filtered.filter(function(d) { return d.city.includes(keyword); });
+    renderTable(filtered);
+  }
+  document.getElementById("tableSearch").addEventListener("input", filterTable);
+  document.getElementById("tierFilter").addEventListener("change", filterTable);
+
+  // Tier pie
+  var tierCount = {};
+  CITY_DATA.forEach(function(d) { tierCount[d.tier] = (tierCount[d.tier] || 0) + 1; });
+  var tierColors = {"一线":"#ff453a","新一线":"#ff9f0a","二线":"#30d158","三线":"#2997ff","四线":"#bf5af2","五线":"#a1a1a6"};
+  createChart(document.getElementById("tierPie"), {
+    tooltip: { trigger: "item", formatter: "{b}: {c} 个 ({d}%)" },
+    series: [{ type: "pie", radius: ["42%", "68%"], center: ["50%", "50%"],
+      data: Object.entries(tierCount).map(function(e) { return { name: e[0], value: e[1], itemStyle: { color: tierColors[e[0]] } }; }),
+      label: { color: "#a1a1a6", fontSize: 13 }, emphasis: { itemStyle: { shadowBlur: 20, shadowColor: "rgba(0,0,0,.3)" } }
+    }]
+  });
+
+  // Phase pie
+  var phaseCount = {};
+  CITY_DATA.forEach(function(d) { phaseCount[d.phase] = (phaseCount[d.phase] || 0) + 1; });
+  var phaseColors = {"成熟":"#2dd4bf","成长":"#2997ff","启动":"#ff9f0a","规划":"#bf5af2"};
+  createChart(document.getElementById("phasePie"), {
+    tooltip: { trigger: "item", formatter: "{b}: {c} 个 ({d}%)" },
+    series: [{ type: "pie", radius: ["42%", "68%"], center: ["50%", "50%"],
+      data: Object.entries(phaseCount).map(function(e) { return { name: e[0] + "阶段", value: e[1], itemStyle: { color: phaseColors[e[0]] || "#a1a1a6" } }; }),
+      label: { color: "#a1a1a6", fontSize: 13 }, emphasis: { itemStyle: { shadowBlur: 20, shadowColor: "rgba(0,0,0,.3)" } }
+    }]
+  });
+
+  // ===== 地图 — 多源加载策略 =====
+  var GEO_URLS = [
+    "https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json",
+    "https://geo.datav.aliyun.com/areas_v2/bound/100000_full.json",
+    "data/china.json"
+  ];
+
+  function renderGeoMap(geoJson) {
+    echarts.registerMap("china", geoJson);
+    document.getElementById("mapLoading").style.display = "none";
+    createChart(document.getElementById("mapChart"), {
+      tooltip: {
+        trigger: "item",
+        formatter: function(p) {
+          var d = CITY_DATA.find(function(x) { return x.city === p.name; });
+          if (d) return '<b>' + d.city + '</b> (' + d.tier + ')<br>阶段: ' + d.phase + ' · 等级: ' + d.level + '<br>用户: ' + d.user + ' · 商户: ' + d.merchant + '<br>地推: ' + d.activity + ' · 流水: ' + d.revenue + '万';
+          return p.name;
+        }
+      },
+      geo: {
+        map: "china", roam: true,
+        itemStyle: { areaColor: "#1d1d1f", borderColor: "rgba(255,255,255,.08)" },
+        emphasis: { itemStyle: { areaColor: "#2a2a2e" } }, label: { show: false }
+      },
+      series: [{
+        type: "scatter", coordinateSystem: "geo",
+        data: CITY_DATA.map(function(d) {
+          var coords = getCityCoords(d.city);
+          return coords[0] !== 0 ? { name: d.city, value: [coords[0], coords[1], d.revenue] } : null;
+        }).filter(Boolean),
+        symbolSize: function(d) { return Math.max(6, Math.min(20, d[2] / 16)); },
+        itemStyle: {
+          color: function(p) {
+            var city = CITY_DATA.find(function(c) { return c.city === p.name; });
+            return city ? (city.level === "高" ? "#2dd4bf" : city.level === "中" ? "#2997ff" : "#ff9f0a") : "#a1a1a6";
+          },
+          shadowBlur: 8, shadowColor: "rgba(45,212,191,.3)"
+        },
+        label: { show: false }
+      }],
+      visualMap: {
+        show: true, type: "piecewise", left: 10, bottom: 10,
+        pieces: [{ value: 2, label: "高", color: "#2dd4bf" }, { value: 1, label: "中", color: "#2997ff" }, { value: 0, label: "低", color: "#ff9f0a" }],
+        textStyle: { color: "#a1a1a6" }
+      }
+    });
+  }
+
+  function renderScatterFallback() {
+    document.getElementById("mapLoading").style.display = "none";
+    var chartDom = document.getElementById("mapChart");
+    var chart = echarts.init(chartDom);
+    var scatterData = CITY_DATA.map(function(d) {
+      var coords = getCityCoords(d.city);
+      if (coords[0] === 0) return null;
+      return {
+        name: d.city,
+        value: [coords[0], coords[1], d.revenue],
+        itemStyle: {
+          color: d.level === "高" ? "#2dd4bf" : d.level === "中" ? "#2997ff" : "#ff9f0a",
+          shadowBlur: d.level === "高" ? 12 : 6,
+          shadowColor: d.level === "高" ? "rgba(45,212,191,.4)" : "rgba(41,151,255,.3)"
+        }
+      };
+    }).filter(Boolean);
+
+    var opt = {
+      backgroundColor: "transparent",
+      tooltip: {
+        trigger: "item",
+        backgroundColor: "rgba(28,28,30,.92)",
+        borderColor: "rgba(255,255,255,.08)",
+        textStyle: { color: "#f5f5f7", fontSize: 13 },
+        extraCssText: "border-radius:12px;backdrop-filter:blur(20px);box-shadow:0 8px 32px rgba(0,0,0,.4);padding:12px 16px;",
+        formatter: function(p) {
+          var d = CITY_DATA.find(function(x) { return x.city === p.name; });
+          if (d) return '<b>' + d.city + '</b> (' + d.tier + ')<br>阶段: ' + d.phase + ' · 等级: ' + d.level + '<br>用户: ' + d.user + ' · 商户: ' + d.merchant + '<br>地推: ' + d.activity + ' · 流水: ' + d.revenue + '万';
+          return p.name;
+        }
+      },
+      xAxis: {
+        type: "value", min: 73, max: 136,
+        axisLine: { show: false }, axisTick: { show: false },
+        axisLabel: { show: false }, splitLine: { show: false }
+      },
+      yAxis: {
+        type: "value", min: 16, max: 54,
+        axisLine: { show: false }, axisTick: { show: false },
+        axisLabel: { show: false }, splitLine: { show: false }
+      },
+      grid: { left: 20, right: 20, top: 20, bottom: 20 },
+      series: [{
+        type: "scatter",
+        data: scatterData,
+        symbolSize: function(d) { return Math.max(5, Math.min(18, d[2] / 18)); },
+        label: {
+          show: false
+        },
+        emphasis: {
+          label: {
+            show: true,
+            formatter: function(p) { return p.name; },
+            color: "#f5f5f7",
+            fontSize: 12,
+            fontWeight: 600,
+            textBorderColor: "rgba(0,0,0,.6)",
+            textBorderWidth: 2
+          },
+          itemStyle: { shadowBlur: 20, shadowColor: "rgba(45,212,191,.6)", borderColor: "#fff", borderWidth: 1 }
+        }
+      }],
+      visualMap: {
+        show: true, type: "piecewise", left: 10, bottom: 10,
+        pieces: [{ gte: 200, label: "高", color: "#2dd4bf" }, { gte: 50, lt: 200, label: "中", color: "#2997ff" }, { lt: 50, label: "低", color: "#ff9f0a" }],
+        textStyle: { color: "#a1a1a6" }, dimension: 2
+      }
+    };
+    chart.setOption(opt);
+    window._chartInstances = window._chartInstances || [];
+    window._chartInstances.push(chart);
+  }
+
+  // Try GeoJSON sources in order, fallback to scatter
+  function tryLoadGeo(index) {
+    if (index >= GEO_URLS.length) {
+      renderScatterFallback();
+      return;
+    }
+    fetch(GEO_URLS[index])
+      .then(function(r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function(geoJson) {
+        if (geoJson && geoJson.features) {
+          renderGeoMap(geoJson);
+        } else {
+          throw new Error("Invalid GeoJSON");
+        }
+      })
+      .catch(function() {
+        tryLoadGeo(index + 1);
+      });
+  }
+
+  tryLoadGeo(0);
+  initScrollAnimations();
+});
+</script>
+</body>
+</html>
