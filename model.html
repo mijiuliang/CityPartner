@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>合作模式 — 来云顶班</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+<body>
+
+<section class="hero section--dark" style="min-height:60vh">
+  <div class="hero-content fade-in">
+    <p class="hero-eyebrow">PARTNERSHIP MODEL</p>
+    <h1 class="hero-title hero-title--gradient">城市合伙人计划</h1>
+    <p class="hero-sub" style="margin:0 auto">你不是来加盟一个平台的，你是来一起把一座城跑起来的。</p>
+  </div>
+</section>
+
+<!-- 平台 vs 你 -->
+<section class="section section--darker">
+  <div class="container text-center">
+    <p class="section-eyebrow fade-in">RESPONSIBILITIES</p>
+    <h2 class="section-title fade-in">平台负责 vs 你负责</h2>
+    <p class="section-sub fade-in" style="margin:0 auto 48px">清晰的分工，高效的协作。</p>
+    <div class="card-grid card-grid--2">
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--blue">🖥️</div>
+        <h3>平台负责</h3>
+        <ul style="margin-top:16px">
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 系统开发与技术迭代</li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 规则制定与标准化 SOP</li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 资金托管与风控体系</li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 品牌背书与培训支持</li>
+          <li style="padding:10px 0;font-size:14px;color:var(--text-m)">→ CRM / 数据监控 / 运营工具</li>
+        </ul>
+      </div>
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--teal">🏪</div>
+        <h3>你负责</h3>
+        <ul style="margin-top:16px">
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 本地商家资源拓展</li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 本地运营团队管理</li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 地推活动组织执行</li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 本地兼职者社群维护</li>
+          <li style="padding:10px 0;font-size:14px;color:var(--text-m)">→ 城市 KPI 指标达成</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 三种合作模式 -->
+<section class="section section--light">
+  <div class="container text-center">
+    <p class="section-eyebrow fade-in">COOPERATION TYPES</p>
+    <h2 class="section-title fade-in">三种合作模式</h2>
+    <p class="section-sub fade-in" style="margin:0 auto 48px">合作非独家授权，按绩效考核动态执行。</p>
+    <div class="card-grid card-grid--3" id="modelGrid"></div>
+  </div>
+</section>
+
+<!-- 收费标准 -->
+<section class="section section--dark">
+  <div class="container">
+    <p class="section-eyebrow fade-in">FEES</p>
+    <h2 class="section-title fade-in">收费标准</h2>
+    <p class="section-sub fade-in">透明定价，按城市等级划分。</p>
+    <div class="table-wrap fade-in" style="max-width:720px;margin-top:32px">
+      <table>
+        <thead><tr><th>收费项</th><th>区间</th><th>说明</th></tr></thead>
+        <tbody id="feeTable"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 收益模型 -->
+<section class="section section--darker">
+  <div class="container text-center">
+    <p class="section-eyebrow fade-in">REVENUE MODEL</p>
+    <h2 class="section-title fade-in">城市合伙人收益模型</h2>
+    <p class="section-sub fade-in" style="margin:0 auto 48px">城市订单分成 · 服务费差价 · 增值业务分成</p>
+    <div class="table-wrap fade-in" style="max-width:600px;margin:0 auto">
+      <table>
+        <thead><tr><th>你的资源</th><th>对应月收益</th></tr></thead>
+        <tbody id="revenueTable"></tbody>
+      </table>
+    </div>
+    <div class="mt-8 fade-in">
+      <div class="chart-box" id="revenueChart" style="max-width:600px;margin:0 auto;height:300px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 投资亮点 -->
+<section class="section section--dark">
+  <div class="container text-center">
+    <p class="section-eyebrow fade-in">HIGHLIGHTS</p>
+    <h2 class="section-title fade-in">投资亮点</h2>
+    <p class="section-sub fade-in" style="margin:0 auto 48px">标准化复制 · 动态考核 · 高 ROI</p>
+    <div class="card-grid card-grid--4">
+      <div class="card card--glass fade-in"><div class="card-icon card-icon--teal">📋</div><h3>总部全套支持</h3><p>SOP / CRM / 培训 / 数据监控全覆盖</p></div>
+      <div class="card card--glass fade-in"><div class="card-icon card-icon--blue">📊</div><h3>动态绩效考核</h3><p>确保城市端持续产出，数据驱动运营</p></div>
+      <div class="card card--glass fade-in"><div class="card-icon card-icon--green">📹</div><h3>高毛利短回本</h3><p>高毛利 + 短回本周期 + 长期盈利空间</p></div>
+      <div class="card card--glass fade-in"><div class="card-icon card-icon--orange">🛡️</div><h3>风险可控</h3><p>非独家授权 + 阶段考核，可进可退</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 发展路线图 -->
+<section class="section section--light" id="roadmap">
+  <div class="container">
+    <p class="section-eyebrow fade-in">ROADMAP</p>
+    <h2 class="section-title fade-in">发展路线图</h2>
+    <p class="section-sub fade-in">MVP → Phase 1 → Phase 2 从长沙到全国</p>
+    <div class="timeline" id="timelineContainer"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="cta-banner scale-in">
+      <h2>无需加盟费 · 标准化工具 · 全程培训支持</h2>
+      <p>低风险轻资产创业，和来云顶班一起建设城市就业基础设施。</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <a href="kpi.html" class="btn btn--teal btn--arrow">查看数据看板</a>
+        <a href="layout.html" class="btn btn--outline btn--arrow">全国城市布局</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="js/data.js"></script>
+<script src="js/shared.js"></script>
+<script>
+onReady(() => {
+  renderNav("model");
+  renderFooter();
+
+  const mg = document.getElementById("modelGrid");
+  PARTNER_MODELS.forEach(m => {
+    mg.innerHTML += `<div class="card card--light fade-in"><div class="card-icon card-icon--teal" style="font-size:32px;background:transparent">${m.icon}</div><h3>${m.type}</h3><p style="margin-bottom:12px">${m.desc}</p><span class="tag tag--teal">${m.condition}</span></div>`;
+  });
+
+  const ft = document.getElementById("feeTable");
+  FEE_DATA.forEach(f => { ft.innerHTML += `<tr><td style="font-weight:600">${f.item}</td><td>${f.range}</td><td>${f.note}</td></tr>`; });
+
+  const rt = document.getElementById("revenueTable");
+  REVENUE_TABLE.forEach(r => { rt.innerHTML += `<tr><td>${r.merchants}</td><td>${r.income}</td></tr>`; });
+
+  createChart(document.getElementById("revenueChart"), {
+    tooltip: { trigger: "axis", formatter: "{b}<br>月收益: {c}" },
+    xAxis: { type: "category", data: ["10家商家", "30家商家", "100家商家"] },
+    yAxis: { type: "value", name: "元/月", axisLabel: { formatter: v => v >= 10000 ? (v/10000)+'万' : v } },
+    series: [{
+      type: "bar", data: [
+        { value: 10000, itemStyle: { color: "#30d158" } },
+        { value: 35000, itemStyle: { color: "#2997ff" } },
+        { value: 80000, itemStyle: { color: "#2dd4bf" } }
+      ],
+      barWidth: "35%", itemStyle: { borderRadius: [8, 8, 0, 0] },
+      label: { show: true, position: "top", color: "#a1a1a6", fontSize: 12, formatter: p => '¥' + p.value.toLocaleString() }
+    }]
+  });
+
+  const tc = document.getElementById("timelineContainer");
+  ROADMAP.forEach(r => {
+    tc.innerHTML += `<div class="timeline-item fade-in"><div class="timeline-dot"></div><div class="timeline-phase">${r.phase} · ${r.time}</div><h3 class="timeline-title">${r.title}</h3><ul class="timeline-list">${r.items.map(i => `<li>${i}</li>`).join("")}</ul></div>`;
+  });
+
+  initScrollAnimations();
+});
+</script>
+</body>
+</html>

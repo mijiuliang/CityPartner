@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>市场机会 — 来云顶班</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+<body>
+
+<section class="hero section--dark" style="min-height:60vh">
+  <div class="hero-content fade-in">
+    <p class="hero-eyebrow">MARKET OPPORTUNITY</p>
+    <h1 class="hero-title hero-title--gradient">300+ 城市<br>万亿级灵活用工市场</h1>
+    <p class="hero-sub" style="margin:0 auto">数字化与本地服务融合趋势加速，同城日结兼职赛道正处于爆发前夜。</p>
+  </div>
+</section>
+
+<section class="section section--darker">
+  <div class="container">
+    <p class="section-eyebrow fade-in">OVERVIEW</p>
+    <h2 class="section-title fade-in">市场全景</h2>
+    <p class="section-sub fade-in">全国 300+ 地级以上城市可覆盖，首年渗透率 15%，三年覆盖率 65%。</p>
+    <div class="card-grid card-grid--4 mt-8">
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--red">🏙️</div>
+        <h3>一线城市</h3>
+        <p>4 个城市 · 潜力极高<br>北京、上海、广州、深圳</p>
+      </div>
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--orange">🌟</div>
+        <h3>新一线城市</h3>
+        <p>15 个城市 · 潜力高<br>成都、杭州、武汉、长沙等</p>
+      </div>
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--green">📈</div>
+        <h3>二线城市</h3>
+        <p>38 个城市 · 潜力中高<br>无锡、佛山、厦门等</p>
+      </div>
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--blue">🗺️</div>
+        <h3>三线及以下</h3>
+        <p>278+ 个城市 · 增长中<br>持续拓展下沉市场</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="card-grid card-grid--2">
+      <div class="fade-in">
+        <p class="section-eyebrow">MARKET SIZE</p>
+        <h2 class="section-title">潜力城市分布</h2>
+        <p class="section-sub">覆盖一线到五线全层级城市网络</p>
+        <div class="chart-box" id="marketBarChart"></div>
+      </div>
+      <div class="fade-in">
+        <p class="section-eyebrow">PENETRATION</p>
+        <h2 class="section-title">三年渗透路径</h2>
+        <p class="section-sub">从 15% 到 65%，阶梯式增长</p>
+        <div class="chart-box" id="penetrationChart"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--light" id="parties">
+  <div class="container text-center">
+    <p class="section-eyebrow fade-in">WIN-WIN MODEL</p>
+    <h2 class="section-title fade-in">四方共赢模型</h2>
+    <p class="section-sub fade-in" style="margin:0 auto 48px">每个角色都能在这里找到价值，缺一不可。</p>
+    <div class="card-grid card-grid--4" id="winwinGrid"></div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <p class="section-eyebrow fade-in">FINANCIAL FORECAST</p>
+    <h2 class="section-title fade-in">三年财务预测</h2>
+    <p class="section-sub fade-in">收入 / 毛利润 / ROI（单位：万元）</p>
+    <div class="chart-box" id="financeChart" style="max-width:720px"></div>
+    <div class="table-wrap fade-in" style="max-width:720px;margin-top:32px">
+      <table>
+        <thead><tr><th>年份</th><th>总收入</th><th>毛利润</th><th>ROI</th></tr></thead>
+        <tbody id="financeTable"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section--darker">
+  <div class="container">
+    <div class="cta-banner scale-in">
+      <h2>抓住万亿市场机遇</h2>
+      <p>成为城市合伙人，共享灵活用工赛道红利。</p>
+      <a href="model.html" class="btn btn--teal btn--arrow">了解合作模式</a>
+    </div>
+  </div>
+</section>
+
+<script src="js/data.js"></script>
+<script src="js/shared.js"></script>
+<script>
+onReady(() => {
+  renderNav("market");
+  renderFooter();
+
+  // Count cities per tier
+  const tierCount = {};
+  CITY_DATA.forEach(d => { tierCount[d.tier] = (tierCount[d.tier] || 0) + 1; });
+  const tierLabels = Object.keys(tierCount);
+  const tierColors = {"一线":"#ff453a","新一线":"#ff9f0a","二线":"#30d158","三线":"#2997ff","四线":"#bf5af2","五线":"#a1a1a6"};
+
+  createChart(document.getElementById("marketBarChart"), {
+    tooltip: { trigger: "axis" },
+    xAxis: { type: "category", data: tierLabels },
+    yAxis: { type: "value", name: "城市数量" },
+    series: [{
+      type: "bar", data: tierLabels.map(t => ({ value: tierCount[t], itemStyle: { color: tierColors[t] || "#2997ff" } })),
+      barWidth: "40%", itemStyle: { borderRadius: [8, 8, 0, 0] },
+      label: { show: true, position: "top", color: "#a1a1a6", fontSize: 12 }
+    }]
+  });
+
+  createChart(document.getElementById("penetrationChart"), {
+    tooltip: { trigger: "axis", formatter: "{b}: {c}%" },
+    xAxis: { type: "category", data: ["启动期", "第1年", "第2年", "第3年"] },
+    yAxis: { type: "value", max: 100, axisLabel: { formatter: "{value}%" } },
+    series: [{
+      type: "line", data: [0, 15, 40, 65], smooth: true,
+      areaStyle: { color: { type: "linear", x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: "rgba(45,212,191,.35)" }, { offset: 1, color: "rgba(45,212,191,.02)" }] } },
+      lineStyle: { color: "#2dd4bf", width: 3 }, itemStyle: { color: "#2dd4bf" }, symbol: "circle", symbolSize: 10
+    }]
+  });
+
+  const wg = document.getElementById("winwinGrid");
+  const colors = ["teal", "blue", "orange", "green"];
+  WIN_WIN.forEach((w, i) => {
+    wg.innerHTML += `<div class="card card--light fade-in"><div class="card-icon card-icon--${colors[i]}">${w.icon}</div><h3>${w.role}</h3><p style="font-size:12px;color:#6e6e73;margin-bottom:12px">${w.sub}</p><ul style="text-align:left">${w.benefits.map(b => `<li style="font-size:13px;color:#1d1d1f;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.04)">→ ${b}</li>`).join("")}</ul></div>`;
+  });
+
+  createChart(document.getElementById("financeChart"), {
+    tooltip: { trigger: "axis" },
+    legend: { data: ["总收入", "毛利润", "ROI"] },
+    xAxis: { type: "category", data: FINANCE_DATA.map(d => d.year) },
+    yAxis: { type: "value", name: "万元" },
+    series: [
+      { name: "总收入", type: "bar", data: FINANCE_DATA.map(d => d.revenue), itemStyle: { color: "#2997ff", borderRadius: [6, 6, 0, 0] } },
+      { name: "毛利润", type: "bar", data: FINANCE_DATA.map(d => d.gross), itemStyle: { color: "#30d158", borderRadius: [6, 6, 0, 0] } },
+      { name: "ROI", type: "line", data: FINANCE_DATA.map(d => d.roi), lineStyle: { color: "#ff9f0a", width: 3 }, itemStyle: { color: "#ff9f0a" }, symbol: "circle", symbolSize: 8 }
+    ]
+  });
+
+  const ft = document.getElementById("financeTable");
+  FINANCE_DATA.forEach(d => {
+    ft.innerHTML += `<tr><td>${d.year}</td><td>${d.revenue.toLocaleString()}</td><td>${d.gross.toLocaleString()}</td><td style="color:#2dd4bf;font-weight:700">${d.roi.toLocaleString()}</td></tr>`;
+  });
+
+  initScrollAnimations();
+});
+</script>
+</body>
+</html>

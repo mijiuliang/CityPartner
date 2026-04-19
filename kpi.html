@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>数据看板 — 来云顶班</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+<body>
+
+<section class="hero section--dark" style="min-height:50vh">
+  <div class="hero-content fade-in">
+    <p class="hero-eyebrow">DATA DASHBOARD</p>
+    <h1 class="hero-title hero-title--gradient">KPI 数据看板</h1>
+    <p class="hero-sub" style="margin:0 auto">实时数据驱动运营，335 个城市 KPI 全景监控。</p>
+  </div>
+</section>
+
+<!-- KPI 考核体系 -->
+<section class="section section--darker">
+  <div class="container">
+    <div class="card-grid card-grid--2">
+      <div class="fade-in">
+        <p class="section-eyebrow">KPI SYSTEM</p>
+        <h2 class="section-title">KPI 考核机制</h2>
+        <p class="section-sub">动态绩效考核，确保城市端持续产出。</p>
+        <div class="table-wrap" style="margin-top:24px">
+          <table>
+            <thead><tr><th>指标</th><th>目标</th><th>权重</th><th>完成率</th></tr></thead>
+            <tbody id="kpiTable"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="fade-in">
+        <p class="section-eyebrow">RADAR</p>
+        <h2 class="section-title">KPI 雷达图</h2>
+        <p class="section-sub">综合考核维度一目了然。</p>
+        <div class="chart-box" id="kpiRadar"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 城市 KPI 详情 -->
+<section class="section section--dark">
+  <div class="container">
+    <p class="section-eyebrow fade-in">CITY KPI</p>
+    <h2 class="section-title fade-in">城市 KPI 详情</h2>
+    <p class="section-sub fade-in">搜索城市或按等级筛选，滑动查看每个城市的数据。</p>
+    <div class="search-row fade-in">
+      <input id="citySearch" class="search-input" placeholder="输入城市名称搜索…">
+      <button class="filter-btn active" data-filter="all">全部</button>
+      <button class="filter-btn" data-filter="一线">一线</button>
+      <button class="filter-btn" data-filter="新一线">新一线</button>
+      <button class="filter-btn" data-filter="二线">二线</button>
+      <button class="filter-btn" data-filter="三线">三线</button>
+      <button class="filter-btn" data-filter="四线">四线</button>
+      <button class="filter-btn" data-filter="五线">五线</button>
+      <span class="page-indicator" id="pageIndicator">—</span>
+    </div>
+    <div class="swiper" id="citySwiper">
+      <div class="swiper-wrapper" id="kpiSlides"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <div id="noResult" style="display:none;text-align:center;padding:48px 0;color:var(--text-m);font-size:15px">未找到匹配的城市</div>
+  </div>
+</section>
+
+<!-- 城市排名 -->
+<section class="section section--darker">
+  <div class="container">
+    <p class="section-eyebrow fade-in">RANKINGS</p>
+    <h2 class="section-title fade-in">城市预测流水排名 TOP 20</h2>
+    <p class="section-sub fade-in">按预测月流水排序（单位：万元）</p>
+    <div class="chart-box fade-in" id="rankChart" style="height:560px"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="cta-banner scale-in">
+      <h2>数据驱动每一个决策</h2>
+      <p>实时看板让运营透明可控，助力城市合伙人持续增长。</p>
+      <a href="layout.html" class="btn btn--teal btn--arrow">查看全国布局</a>
+    </div>
+  </div>
+</section>
+
+<script src="js/data.js"></script>
+<script src="js/shared.js"></script>
+<script>
+let swiperInstance = null;
+let radarCharts = [];
+
+function buildSlides(cities) {
+  const wrapper = document.getElementById("kpiSlides");
+  const noResult = document.getElementById("noResult");
+  const swiperEl = document.getElementById("citySwiper");
+  radarCharts.forEach(c => { try { c.dispose(); } catch(e) {} });
+  radarCharts = [];
+  wrapper.innerHTML = "";
+
+  if (cities.length === 0) {
+    swiperEl.style.display = "none";
+    noResult.style.display = "block";
+    document.getElementById("pageIndicator").textContent = "0 / 0";
+    if (swiperInstance) { swiperInstance.destroy(true, true); swiperInstance = null; }
+    return;
+  }
+  swiperEl.style.display = "block";
+  noResult.style.display = "none";
+
+  cities.forEach((d, i) => {
+    const slide = document.createElement("div");
+    slide.className = "swiper-slide";
+    slide.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div><div class="city-name">${d.city}</div><div class="city-meta">${d.tier} · ${d.phase}阶段 · 等级: ${d.level}</div></div>
+        <span class="tag tag--${d.level==='高'?'teal':d.level==='中'?'blue':'orange'}">${d.level}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px">
+        <div style="text-align:center"><div style="font-size:24px;font-weight:700;color:var(--teal)">${d.user}</div><div style="font-size:11px;color:var(--text-m)">用户目标</div></div>
+        <div style="text-align:center"><div style="font-size:24px;font-weight:700;color:var(--blue)">${d.merchant}</div><div style="font-size:11px;color:var(--text-m)">商户目标</div></div>
+        <div style="text-align:center"><div style="font-size:24px;font-weight:700;color:var(--orange)">${d.activity}</div><div style="font-size:11px;color:var(--text-m)">地推活动</div></div>
+        <div style="text-align:center"><div style="font-size:24px;font-weight:700;color:var(--green)">${d.revenue}</div><div style="font-size:11px;color:var(--text-m)">流水(万)</div></div>
+      </div>
+      <div class="kpi-chart" id="radar-${i}"></div>`;
+    wrapper.appendChild(slide);
+  });
+
+  if (swiperInstance) { swiperInstance.destroy(true, true); }
+  swiperInstance = new Swiper("#citySwiper", {
+    slidesPerView: 1, spaceBetween: 16,
+    pagination: { el: ".swiper-pagination", clickable: true },
+    breakpoints: { 768: { slidesPerView: 2 } },
+    on: {
+      slideChange: function() { updatePI(this, cities.length); },
+      init: function() { updatePI(this, cities.length); }
+    }
+  });
+
+  cities.forEach((d, i) => {
+    const dom = document.getElementById("radar-" + i);
+    if (dom) {
+      const maxU = d.tier==="一线"||d.tier==="新一线" ? 200 : 100;
+      const maxM = d.tier==="一线"||d.tier==="新一线" ? 30 : 20;
+      const maxA = 16;
+      const maxR = d.tier==="一线"||d.tier==="新一线" ? 400 : 200;
+      const chart = createChart(dom, {
+        radar: { indicator: [{ name: "用户", max: maxU }, { name: "商户", max: maxM }, { name: "地推", max: maxA }, { name: "流水", max: maxR }], radius: "65%" },
+        series: [{ type: "radar", data: [{ value: [d.user, d.merchant, d.activity, d.revenue], name: d.city }],
+          areaStyle: { color: "rgba(45,212,191,.15)" }, lineStyle: { color: "#2dd4bf", width: 2 }, itemStyle: { color: "#2dd4bf" } }]
+      });
+      radarCharts.push(chart);
+    }
+  });
+}
+
+function updatePI(swiper, total) {
+  const current = swiper.activeIndex + 1;
+  document.getElementById("pageIndicator").textContent = Math.min(current, total) + " / " + total + " 城市";
+}
+
+onReady(() => {
+  renderNav("kpi");
+  renderFooter();
+
+  // KPI table
+  const kt = document.getElementById("kpiTable");
+  KPI_DATA.forEach(k => {
+    const barColor = k.completion >= 85 ? "#30d158" : k.completion >= 75 ? "#ff9f0a" : "#ff453a";
+    kt.innerHTML += `<tr><td style="font-weight:600">${k.name}</td><td>${k.target}</td><td>${k.weight}</td><td><div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden"><div style="width:${k.completion}%;height:100%;background:${barColor};border-radius:3px"></div></div><span style="font-size:13px;color:${barColor};font-weight:600">${k.completion}%</span></div></td></tr>`;
+  });
+
+  // KPI Radar
+  createChart(document.getElementById("kpiRadar"), {
+    tooltip: {},
+    radar: { indicator: KPI_DATA.map(k => ({ name: k.name, max: 100 })), radius: "65%" },
+    series: [{ type: "radar", data: [{ value: KPI_DATA.map(k => k.completion), name: "本季度完成率" }],
+      areaStyle: { color: "rgba(45,212,191,.18)" }, lineStyle: { color: "#2dd4bf", width: 2 }, itemStyle: { color: "#2dd4bf" } }]
+  });
+
+  // Initial slides
+  buildSlides(CITY_DATA);
+
+  // Search
+  document.getElementById("citySearch").addEventListener("input", filterCities);
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      filterCities();
+    });
+  });
+
+  function filterCities() {
+    const keyword = document.getElementById("citySearch").value.trim();
+    const activeFilter = document.querySelector(".filter-btn.active")?.dataset.filter || "all";
+    let filtered = CITY_DATA;
+    if (activeFilter !== "all") filtered = filtered.filter(d => d.tier === activeFilter);
+    if (keyword) filtered = filtered.filter(d => d.city.includes(keyword));
+    buildSlides(filtered);
+  }
+
+  // Rankings chart
+  const top20 = [...CITY_DATA].sort((a, b) => b.revenue - a.revenue).slice(0, 20).reverse();
+  createChart(document.getElementById("rankChart"), {
+    tooltip: { trigger: "axis", formatter: p => p[0].name + ": " + p[0].value + " 万元" },
+    grid: { left: 90, right: 40, top: 20, bottom: 30 },
+    xAxis: { type: "value", name: "万元" },
+    yAxis: { type: "category", data: top20.map(d => d.city) },
+    series: [{
+      type: "bar",
+      data: top20.map(d => ({
+        value: d.revenue,
+        itemStyle: { color: d.level === "高" ? "#2dd4bf" : d.level === "中" ? "#2997ff" : "#ff9f0a", borderRadius: [0, 6, 6, 0] }
+      })),
+      barWidth: "55%",
+      label: { show: true, position: "right", color: "#a1a1a6", fontSize: 12, formatter: "{c}" }
+    }]
+  });
+
+  initScrollAnimations();
+});
+</script>
+</body>
+</html>

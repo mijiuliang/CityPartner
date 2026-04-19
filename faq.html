@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>常见问题 — 来云顶班</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+<body>
+
+<section class="hero section--dark" style="min-height:50vh">
+  <div class="hero-content fade-in">
+    <p class="hero-eyebrow">FAQ</p>
+    <h1 class="hero-title hero-title--gradient">常见问题</h1>
+    <p class="hero-sub" style="margin:0 auto">关于来云顶班，你可能想了解的一切。</p>
+  </div>
+</section>
+
+<!-- FAQ 列表 -->
+<section class="section section--darker">
+  <div class="container" style="max-width:780px">
+    <p class="section-eyebrow fade-in">QUESTIONS</p>
+    <h2 class="section-title fade-in">产品与服务</h2>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- 平台盈利 -->
+<section class="section section--dark">
+  <div class="container" style="max-width:780px">
+    <p class="section-eyebrow fade-in">BUSINESS MODEL</p>
+    <h2 class="section-title fade-in">平台盈利模式</h2>
+    <p class="section-sub fade-in">三项核心收入来源，规模化后潜力巨大。</p>
+    <div class="card-grid card-grid--3 mt-8">
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--teal">💳</div>
+        <h3>商家服务费</h3>
+        <p>每单收取 5%–10% 服务费，按行业和城市分级定价</p>
+      </div>
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--blue">🛡️</div>
+        <h3>保险分成</h3>
+        <p>为每位在岗兼职购买人身意外险，保险分成收益</p>
+      </div>
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--orange">📊</div>
+        <h3>增值服务</h3>
+        <p>批量招聘、高级数据分析、企业定制方案等高毛利业务</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 商家入驻流程 -->
+<section class="section section--light">
+  <div class="container text-center" style="max-width:780px">
+    <p class="section-eyebrow fade-in">MERCHANT ONBOARDING</p>
+    <h2 class="section-title fade-in">商家入驻流程</h2>
+    <p class="section-sub fade-in" style="margin:0 auto">简单三步，即可开始用工。</p>
+    <div class="steps" style="grid-template-columns:repeat(3,1fr);margin-top:48px">
+      <div class="step fade-in">
+        <div class="step-num">1</div>
+        <h4>提交资质</h4>
+        <p>营业执照 + 身份证实名认证</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">2</div>
+        <h4>发布岗位</h4>
+        <p>使用职位模板，参考定价建议</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">3</div>
+        <h4>开始用工</h4>
+        <p>兼职者抢单上岗，工资自动结算</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 城市合伙人条件 -->
+<section class="section section--dark">
+  <div class="container" style="max-width:780px">
+    <p class="section-eyebrow fade-in">PARTNER REQUIREMENTS</p>
+    <h2 class="section-title fade-in">城市合伙人加入条件</h2>
+    <p class="section-sub fade-in">我们寻找的是有本地资源、有运营能力的城市创业者。</p>
+    <div class="card-grid card-grid--2 mt-8">
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--teal">✓</div>
+        <h3>基本条件</h3>
+        <ul style="margin-top:16px">
+          <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 具备本地商业资源和人脉</li>
+          <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 可组建或管理 3-5 人运营团队</li>
+          <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 认同平台理念和标准化运营模式</li>
+          <li style="padding:8px 0;font-size:14px;color:var(--text-m)">→ 有创业热情和长期投入意愿</li>
+        </ul>
+      </div>
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--blue">💰</div>
+        <h3>费用说明</h3>
+        <ul style="margin-top:16px">
+          <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 入场费：1.5 - 10 万元（按城市等级）</li>
+          <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 年度服务费：1.8 - 3 万元/年</li>
+          <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;color:var(--text-m)">→ 保证金：0.3 - 1 万元（可退还）</li>
+          <li style="padding:8px 0;font-size:14px;color:var(--text-m)">→ 无隐性费用，合同透明</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 收益预期 -->
+<section class="section section--darker">
+  <div class="container text-center" style="max-width:780px">
+    <p class="section-eyebrow fade-in">EXPECTED RETURNS</p>
+    <h2 class="section-title fade-in">收益预期</h2>
+    <p class="section-sub fade-in" style="margin:0 auto 32px">三项收益来源，持续增长。</p>
+    <div class="table-wrap fade-in">
+      <table>
+        <thead><tr><th>你的资源规模</th><th>月收益预期</th><th>收益来源</th></tr></thead>
+        <tbody>
+          <tr><td>10 家稳定商家</td><td style="color:var(--teal);font-weight:700">¥5,000 - 15,000</td><td>订单分成 + 服务费差价</td></tr>
+          <tr><td>30 家稳定商家</td><td style="color:var(--blue);font-weight:700">¥20,000 - 50,000</td><td>订单分成 + 服务费 + 增值业务</td></tr>
+          <tr><td>100 家稳定商家</td><td style="color:var(--green);font-weight:700">¥80,000+</td><td>全渠道收益 + 规模效应</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="chart-box fade-in" id="returnChart" style="height:300px;margin-top:24px"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="cta-banner scale-in">
+      <h2>还有其他问题？</h2>
+      <p>联系我们，获取更多信息。</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <a href="model.html" class="btn btn--teal btn--arrow">立即申请合伙人</a>
+        <a href="mailto:contact@laiyun.com" class="btn btn--outline btn--arrow">联系我们</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="js/data.js"></script>
+<script src="js/shared.js"></script>
+<script>
+onReady(() => {
+  renderNav("faq");
+  renderFooter();
+
+  // FAQ list
+  const fl = document.getElementById("faqList");
+  FAQ_ITEMS.forEach((item, i) => {
+    const div = document.createElement("div");
+    div.className = "faq-item fade-in";
+    div.innerHTML = `<div class="faq-q"><span>${item.q}</span><span class="icon">+</span></div><div class="faq-a">${item.a}</div>`;
+    div.querySelector(".faq-q").addEventListener("click", () => { div.classList.toggle("open"); });
+    fl.appendChild(div);
+  });
+
+  // Return chart
+  createChart(document.getElementById("returnChart"), {
+    tooltip: { trigger: "axis", formatter: "{b}<br>月收益: ¥{c}" },
+    xAxis: { type: "category", data: ["10家商家", "30家商家", "100家商家"] },
+    yAxis: { type: "value", name: "元/月", axisLabel: { formatter: v => v >= 10000 ? (v/10000)+"万" : v } },
+    series: [{
+      type: "bar", data: [
+        { value: 10000, itemStyle: { color: "#2dd4bf" } },
+        { value: 35000, itemStyle: { color: "#2997ff" } },
+        { value: 80000, itemStyle: { color: "#30d158" } }
+      ],
+      barWidth: "35%", itemStyle: { borderRadius: [8, 8, 0, 0] },
+      label: { show: true, position: "top", color: "#a1a1a6", fontSize: 12, formatter: p => "¥" + p.value.toLocaleString() }
+    }]
+  });
+
+  initScrollAnimations();
+});
+</script>
+</body>
+</html>

@@ -3,156 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>来云顶班全国城市合伙人招商数据看板</title>
-<style>
-/* ===== 基础样式 ===== */
-:root{
-  --bg:#050816; --panel:rgba(15,23,42,.88); --panel2:rgba(15,23,42,.68);
-  --border:rgba(148,163,184,.28); --text:#e5e7eb; --sub:#9ca3af;
-  --accent:#38bdf8; --accent2:rgba(56,189,248,.18); --shadow:0 18px 45px rgba(2,6,23,.65);
-  --radius:16px;
-}
-*{box-sizing:border-box;}
-html,body{height:100%; margin:0; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text);}
-header{position:sticky;top:0;background:rgba(15,23,42,.92);backdrop-filter:blur(16px);padding:12px 16px;border-bottom:1px solid var(--border);z-index:10;}
-header h1{margin:0;font-size:18px;} header p{margin:2px 0 0;font-size:12px;color:var(--sub);}
-.wrap{max-width:1200px;margin:16px auto;padding:0 12px;}
-.grid{display:grid; grid-template-columns:1fr; gap:12px;}
-@media(min-width:980px){.grid{grid-template-columns:1fr 1fr;}}
-.panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;padding:12px;}
-.panel h2{margin:0;font-size:15px;}
-.panel p{margin:4px 0 0;font-size:12px;color:var(--sub);}
-.list{list-style:none;padding:0;margin:8px 0;display:flex;flex-direction:column;gap:6px;}
-.list li{background:var(--panel2);padding:8px;border-radius:12px;display:flex;gap:8px;}
-.list .num{width:24px;height:24px;border-radius:50%;background:var(--accent2);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;}
-.swiper-container{margin-top:12px;}
-.swiper-slide{background:radial-gradient(circle at top, rgba(15,118,110,.35), rgba(15,23,42,.95));border:1px solid rgba(45,212,191,.30);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px;will-change:transform;}
-.kpi-chart{width:100%;height:160px;margin-top:6px;}
-.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px;}
-.input{padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(2,6,23,.35);color:var(--text);outline:none;font-size:12px;}
-.footer{text-align:center;font-size:11px;color:var(--sub);padding:12px 10px 18px;border-top:1px solid rgba(148,163,184,.12);background:rgba(15,23,42,.95);}
-</style>
+<title>来云顶班 — 同城日结兼职交付基础设施</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 </head>
 <body>
-<header>
-  <h1>来云顶班全国城市合伙人招商数据看板</h1>
-  <p>标准化复制 · 动态考核 · 高 ROI 城市合伙人增长模型</p>
-</header>
 
-<main class="wrap">
-<div class="grid">
-  <!-- 财务预测 -->
-  <div class="panel">
-    <h2>三年财务预测</h2>
-    <p>收入 / 毛利润 / ROI（单位：万元）</p>
-    <div id="financeChart" style="width:100%;height:240px;"></div>
-  </div>
-
-  <!-- 投资亮点 -->
-  <div class="panel">
-    <h2>投资亮点</h2>
-    <p>标准化复制 · 动态考核 · 高 ROI</p>
-    <ul class="list">
-      <li><span class="num">01</span>总部全套支持（SOP / CRM / 培训 / 数据监控）</li>
-      <li><span class="num">02</span>动态绩效考核，确保城市端持续产出</li>
-      <li><span class="num">03</span>高毛利 + 短回本 + 长期盈利空间</li>
-      <li><span class="num">04</span>非独家授权 + 阶段考核，风险可控</li>
-    </ul>
-  </div>
-
-  <!-- 全国城市布局 -->
-  <div class="panel">
-    <h2>全国城市布局</h2>
-    <p>点击城市查看 KPI 摘要</p>
-    <div id="mapChart" style="width:100%;height:240px;"></div>
-  </div>
-
-  <!-- 城市 KPI Swiper -->
-  <div class="panel">
-    <h2>城市 KPI 详情</h2>
-    <p>搜索城市名称</p>
-    <div class="row">
-      <input id="citySearch" class="input" placeholder="输入城市…">
-      <span id="pageIndicator">—</span>
+<!-- ===== Hero ===== -->
+<section class="hero section--dark">
+  <div class="hero-content fade-in">
+    <p class="hero-eyebrow">同城日结兼职 · 城市就业网络基础设施</p>
+    <h1 class="hero-title hero-title--gradient">把城市零散用工<br>变成一张可结算的网络</h1>
+    <p class="hero-sub" style="margin:0 auto">商家快速用工 · 兼职者日结到账 · 城市服务商轻松分成</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="val">335</div><div class="label">覆盖城市</div></div>
+      <div class="hero-stat"><div class="val">T+0</div><div class="label">日结算</div></div>
+      <div class="hero-stat"><div class="val">92%</div><div class="label">目标完成率</div></div>
+      <div class="hero-stat"><div class="val">0%</div><div class="label">目标投诉率</div></div>
     </div>
-    <div class="swiper-container">
-      <div class="swiper-wrapper" id="kpiSlides"></div>
+    <div class="hero-actions">
+      <a href="model.html" class="btn btn--teal btn--arrow">申请城市合伙人</a>
+      <a href="market.html" class="btn btn--outline btn--arrow">了解产品</a>
     </div>
   </div>
-</div>
-</main>
+</section>
 
-<footer class="footer">© 来云顶班城市合伙人项目 · 单文件版</footer>
+<!-- ===== We Are Not ===== -->
+<section class="section section--darker">
+  <div class="container text-center">
+    <p class="section-eyebrow fade-in">WE ARE NOT</p>
+    <h2 class="section-title fade-in">我们不是什么</h2>
+    <p class="section-sub fade-in" style="margin:0 auto 48px">市面上已有太多"平台"，但它们大多只解决信息问题，从不承担结果。来云顶班不一样。</p>
+    <div class="card-grid card-grid--3">
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--red">✕</div>
+        <h3>不是招聘平台</h3>
+        <p>不靠广告、不卖简历、不收中介费。我们不是卖信息的，而是对结果负责的交付平台。</p>
+      </div>
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--red">✕</div>
+        <h3>不是劳务派遣</h3>
+        <p>不兜底用工风险、不制造劳动关系。我们是技术平台，不是用人单位。</p>
+      </div>
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--red">✕</div>
+        <h3>不是加盟招商</h3>
+        <p>不卖城市名额、不靠一刀加盟费。我们走的是城市经营权分成模式，共建而非买卖。</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- ===== 内嵌 ECharts + China GeoJSON + Swiper ===== -->
+<!-- ===== What We Are ===== -->
+<section class="section section--dark">
+  <div class="container text-center">
+    <p class="section-eyebrow fade-in">WHAT WE ARE</p>
+    <h2 class="section-title fade-in">一套城市级就业操作系统</h2>
+    <p class="section-sub fade-in" style="margin:0 auto 48px">以真实线下节点（驿站 / 商户 / 服务点）为组织基础，把城市里的零散劳动力，变成一个可调度、可复用、可结算、可合规的用工网络。</p>
+    <div class="card-grid card-grid--4">
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--teal">🏠</div>
+        <h3>真实线下节点</h3>
+        <p>驿站 / 商户 / 服务点三重结构</p>
+      </div>
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--blue">💰</div>
+        <h3>资金托管闭环</h3>
+        <p>商家预付 · 平台托管 · 自动发薪</p>
+      </div>
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--green">✓</div>
+        <h3>履约可验证</h3>
+        <p>定位 + 时间 + 行为校验全链路</p>
+      </div>
+      <div class="card card--glass fade-in">
+        <div class="card-icon card-icon--orange">🤝</div>
+        <h3>城市合伙人模式</h3>
+        <p>经营权 + 分成 · 可进可退</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 四步闭环 ===== -->
+<section class="section section--light" id="how">
+  <div class="container text-center">
+    <p class="section-eyebrow fade-in">HOW IT WORKS</p>
+    <h2 class="section-title fade-in">四步完成日结用工闭环</h2>
+    <p class="section-sub fade-in" style="margin:0 auto">从任务发布到工资到账，全程自动化，零纠纷。</p>
+    <div class="steps" id="stepsContainer"></div>
+  </div>
+</section>
+
+<!-- ===== 六大核心优势 ===== -->
+<section class="section section--dark" id="advantages">
+  <div class="container text-center">
+    <p class="section-eyebrow fade-in">ADVANTAGES</p>
+    <h2 class="section-title fade-in">为什么选择来云顶班</h2>
+    <p class="section-sub fade-in" style="margin:0 auto 48px">六个核心能力，构建竞争护城河。</p>
+    <div class="card-grid card-grid--3" id="advantagesGrid"></div>
+  </div>
+</section>
+
+<!-- ===== 长沙 MVP ===== -->
+<section class="section section--darker">
+  <div class="container text-center">
+    <p class="section-eyebrow fade-in">MVP VALIDATION</p>
+    <h2 class="section-title fade-in">长沙 MVP 成功标准（首城验证）</h2>
+    <div class="hero-stats mt-8 fade-in">
+      <div class="hero-stat"><div class="val">32+</div><div class="label">日完成订单</div></div>
+      <div class="hero-stat"><div class="val">≥92%</div><div class="label">订单完成率</div></div>
+      <div class="hero-stat"><div class="val">≤0%</div><div class="label">投诉率上限</div></div>
+      <div class="hero-stat"><div class="val">T+0</div><div class="label">全自动结算</div></div>
+    </div>
+    <div class="mt-12 fade-in">
+      <a href="layout.html" class="btn btn--primary btn--arrow">查看全国布局</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="cta-banner scale-in">
+      <h2>一起建城市就业基础设施</h2>
+      <p>无论你是城市服务商、商家还是投资人，来云顶班都欢迎你。</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <a href="model.html" class="btn btn--teal btn--arrow">城市合伙人申请</a>
+        <a href="faq.html" class="btn btn--outline btn--arrow">常见问题</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="js/data.js"></script>
+<script src="js/shared.js"></script>
 <script>
-// ==== ECharts 内嵌 =====
-// 1. ECharts 基础
-!function(){function e(e,t){var r=document.createElement("script");r.src=e,r.onload=t,document.head.appendChild(r)}window.loadECharts=function(t){t()};}();
-
-// 2. 内嵌 China GeoJSON（省略省略，示例，实际可直接嵌入完整 geoJSON）
-window.CHINA_GEOJSON={"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"北京"},"geometry":{"type":"Polygon","coordinates":[]}}]};
-
-// ==== 数据区 ====
-const FINANCE_DATA=[
-  {year:"第1年",revenue:2360,gross:1770,roi:590},
-  {year:"第2年",revenue:5700,gross:4275,roi:2015},
-  {year:"第3年",revenue:8496,gross:6372,roi:4139}
-];
-const CITY_DATA=[
-  {city:"北京",user:180,merchant:26,activity:14,revenue:360,level:"高"},
-  {city:"上海",user:170,merchant:24,activity:13,revenue:340,level:"高"},
-  {city:"深圳",user:165,merchant:23,activity:12,revenue:330,level:"高"},
-  {city:"广州",user:155,merchant:22,activity:12,revenue:310,level:"高"}
-];
-const LEVEL_VALUE={"低":0,"中":1,"高":2};
-
-// ==== 初始化图表 ====
-function initFinanceChart(){
-  const dom=document.getElementById("financeChart");
-  const chart=echarts.init(dom);
-  chart.setOption({
-    tooltip:{trigger:"axis"},
-    legend:{data:["收入","毛利润","ROI"],textStyle:{color:"#e5e7eb"}},
-    xAxis:{type:"category",data:FINANCE_DATA.map(d=>d.year),axisLine:{lineStyle:{color:"#64748b"}},axisLabel:{color:"#cbd5f5"}},
-    yAxis:{type:"value",axisLine:{lineStyle:{color:"#64748b"}},splitLine:{lineStyle:{color:"rgba(148,163,184,.22)"}},axisLabel:{color:"#cbd5f5"}},
-    series:[
-      {name:"收入",type:"bar",data:FINANCE_DATA.map(d=>d.revenue)},
-      {name:"毛利润",type:"bar",data:FINANCE_DATA.map(d=>d.gross)},
-      {name:"ROI",type:"line",data:FINANCE_DATA.map(d=>d.roi)}
-    ]
+onReady(() => {
+  renderNav("index");
+  renderFooter();
+  const sc = document.getElementById("stepsContainer");
+  FOUR_STEPS.forEach(s => {
+    sc.innerHTML += `<div class="step fade-in"><div class="step-num">${s.num}</div><h4>${s.title}</h4><p>${s.desc}</p><span class="tag tag--teal" style="margin-top:8px">${s.tag}</span></div>`;
   });
-}
-
-// ==== 初始化地图 ====
-function initMapChart(){
-  const dom=document.getElementById("mapChart");
-  const chart=echarts.init(dom);
-  chart.setOption({
-    tooltip:{trigger:"item",formatter:p=>{const d=CITY_DATA.find(x=>x.city===p.name);return d?`${d.city}<br>阶段:${d.level}<br>用户:${d.user}<br>商户:${d.merchant}<br>地推:${d.activity}<br>流水:${d.revenue}万`:`${p.name}未配置`}},
-    visualMap:{type:"piecewise",left:10,bottom:10,pieces:[{value:2,label:"高",color:"#f97373"},{value:1,label:"中",color:"#facc15"},{value:0,label:"低",color:"#4ade80"}],textStyle:{color:"#e5e7eb"}},
-    series:[{type:"map",map:"china",roam:true,data:CITY_DATA.map(c=>({name:c.city,value:LEVEL_VALUE[c.level]}))}]
+  const ag = document.getElementById("advantagesGrid");
+  ADVANTAGES.forEach(a => {
+    ag.innerHTML += `<div class="card card--glass fade-in"><div class="card-icon card-icon--${a.color}">${a.icon}</div><h3>${a.title}</h3><p>${a.desc}</p></div>`;
   });
-}
-
-// ==== 初始化 Swiper + KPI 雷达图 ====
-function renderSlides(){
-  const wrapper=document.getElementById("kpiSlides");
-  wrapper.innerHTML="";
-  CITY_DATA.forEach((d,i)=>{
-    const slide=document.createElement("div");
-    slide.className="swiper-slide";
-    slide.innerHTML=`<div class="city">${d.city}</div><div>KPI 雷达图</div>`;
-    wrapper.appendChild(slide);
-  });
-  new Swiper(".swiper-container",{slidesPerView:1,spaceBetween:10});
-}
-
-// ==== 启动 ====
-document.addEventListener("DOMContentLoaded",()=>{
-  initFinanceChart();
-  initMapChart();
-  renderSlides();
+  initScrollAnimations();
 });
 </script>
 </body>
