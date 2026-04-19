@@ -145,6 +145,14 @@ function renderFooter() {
           <a href="faq.html">关于我们</a>
           <a href="mailto:contact@laiyundingban.com">联系我们</a>
         </div>
+
+        <!-- 新增：联系人板块 -->
+        <div class="footer-col">
+          <h4>联系人</h4>
+          <p>驿站老村长 手机：13333######（肖总）</p>
+          <p>招商负责人 手机：1580003333#（龚总）</p>
+        </div>
+
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 湖南稻谷山人力资源有限公司</span>
