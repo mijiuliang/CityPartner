@@ -147,7 +147,7 @@ function renderFooter() {
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 湖南七玉堂文化传播有限公司</span>
+        <span>&copy; 2026 湖南稻谷山人力资源有限公司</span>
         <span>来云顶班 · 同城日结兼职交付基础设施</span>
       </div>
     </div>`;
