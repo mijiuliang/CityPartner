@@ -143,42 +143,45 @@ function renderFooter() {
         <div class="footer-col">
           <h4>关于</h4>
           <a href="faq.html">关于我们</a>
-          <a href="javascript:openContactModal()">联系我们</a>
+          <a href="javascript:showContact()">联系我们</a>
         </div>
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 湖南稻谷山人力资源有限公司</span>
         <span>来云顶班 · 同城日结兼职交付基础设施</span>
       </div>
-    </div>
-
-    <!-- 联系我们弹窗 适配苹果暗黑风格 -->
-    <div id="contactModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:9999;display:flex;align-items:center;justify-content:center;">
-      <div style="background:#1c1c1e;border-radius:16px;padding:28px 32px;width:90%;max-width:420px;color:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;">
-        <h3 style="margin:0 0 20px;font-size:18px;font-weight:600;">联系我们</h3>
-        
-        <p style="margin:10px 0;color:#a1a1a6;font-size:14px;line-height:1.8;">
-          驿站老村长
-          <a href="tel:13333000000" style="color:#007aff;text-decoration:none;">13333######（肖总）</a>
-        </p>
-
-        <p style="margin:10px 0;color:#a1a1a6;font-size:14px;line-height:1.8;">
-          招商负责人
-          <a href="tel:15800033333" style="color:#007aff;text-decoration:none;">1580003333#（龚总）</a>
-        </p>
-
-        <button onclick="closeContactModal()" style="margin-top:24px;width:100%;padding:12px 0;background:#3a3a3c;border:none;border-radius:12px;color:#fff;font-size:15px;cursor:pointer;border:0;">关闭</button>
-      </div>
-    </div>
-  `;
+    </div>`;
   document.body.appendChild(footer);
 }
 
-// 打开联系弹窗
-function openContactModal(){
-  document.getElementById('contactModal').style.display='flex';
-}
-// 关闭联系弹窗
-function closeContactModal(){
-  document.getElementById('contactModal').style.display='none';
+// 联系弹窗（安全版，只点击才出现）
+function showContact(){
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.85); backdrop-filter:blur(12px);
+    z-index:9999; display:flex; align-items:center; justify-content:center;
+    font-family:-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+  `;
+
+  modal.innerHTML = `
+  <div style="background:#1c1c1e; border-radius:18px; padding:30px; width:90%; max-width:400px; color:#f5f5f7;">
+    <h3 style="margin:0 0 22px; font-size:18px; font-weight:600;">联系我们</h3>
+    <p style="color:#a1a1a6; font-size:14px; line-height:1.8; margin:8px 0;">
+      驿站老村长
+      <a href="tel:13333000000" style="color:#007aff; text-decoration:none;">13333######（肖总）</a>
+    </p>
+    <p style="color:#a1a1a6; font-size:14px; line-height:1.8; margin:8px 0;">
+      招商负责人
+      <a href="tel:15800033333" style="color:#007aff; text-decoration:none;">1580003333#（龚总）</a>
+    </p>
+    <button onclick="this.parentElement.parentElement.remove()" style="
+      margin-top:24px; width:100%; padding:12px 0;
+      background:#3a3a3c; border:none; border-radius:12px;
+      color:#fff; font-size:15px; cursor:pointer;
+    ">关闭</button>
+  </div>`;
+
+  modal.onclick = (e) => { if (e.target === modal) modal.remove(); }
+  document.body.appendChild(modal);
 }
