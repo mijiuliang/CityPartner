@@ -169,11 +169,11 @@ function showContact(){
     <h3 style="margin:0 0 22px; font-size:18px; font-weight:600;">联系我们</h3>
     <p style="color:#a1a1a6; font-size:14px; line-height:1.8; margin:8px 0;">
       驿站老村长
-      <a href="tel:13333000000" style="color:#007aff; text-decoration:none;">13333######（肖总）</a>
+      <a href="tel:18684839452" style="color:#007aff; text-decoration:none;">18684839452（肖总）</a>
     </p>
     <p style="color:#a1a1a6; font-size:14px; line-height:1.8; margin:8px 0;">
       招商负责人
-      <a href="tel:15800033333" style="color:#007aff; text-decoration:none;">1580003333#（龚总）</a>
+      <a href="tel:15573133866" style="color:#007aff; text-decoration:none;">15573133866#（龚总）</a>
     </p>
     <button onclick="this.parentElement.parentElement.remove()" style="
       margin-top:24px; width:100%; padding:12px 0;
