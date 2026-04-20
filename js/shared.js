@@ -173,7 +173,7 @@ function showContact(){
     </p>
     <p style="color:#a1a1a6; font-size:14px; line-height:1.8; margin:8px 0;">
       招商负责人
-      <a href="tel:15573133866" style="color:#007aff; text-decoration:none;">15573133866#（龚总）</a>
+      <a href="tel:15573133866" style="color:#007aff; text-decoration:none;">15573133866（龚总）</a>
     </p>
     <button onclick="this.parentElement.parentElement.remove()" style="
       margin-top:24px; width:100%; padding:12px 0;
